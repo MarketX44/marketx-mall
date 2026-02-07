@@ -41,7 +41,21 @@ s1.setAttribute('crossorigin','*');
 s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
-</body>
+<script>
+    function login() {
+        const user = document.getElementById('username').value;
+        const pass = document.getElementById('password').value;
 
-</html>
+        // ဒီနေရာမှာ သင်ပေးချင်တဲ့ Password ကို ပြင်လို့ရပါတယ်
+        const correctPassword = "admin123"; 
+
+        if (pass === correctPassword) {
+            alert("Welcome back, " + user + "!");
+            window.location.href = "dashboard.html";
+        } else {
+            alert("Password မှားယွင်းနေပါသည်။ ပြန်ပွားစစ်ဆေးပါ။");
+        }
+    }
+</script>
+
 
