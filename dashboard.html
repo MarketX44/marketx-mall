@@ -13,7 +13,6 @@
         .details { padding: 12px; }
         .title { font-size: 14px; font-weight: bold; margin: 0; color: #333; }
         .price { color: #007bff; font-size: 16px; font-weight: bold; margin: 5px 0; }
-        .commission { display: inline-block; background: #d1e7dd; color: #0f5132; font-size: 11px; padding: 3px 8px; border-radius: 5px; }
         .buy-btn { width: 100%; background: #001f3f; color: white; border: none; padding: 10px; margin-top: 10px; border-radius: 8px; cursor: pointer; font-weight: bold; }
         .bottom-menu { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #eee; }
     </style>
@@ -30,7 +29,6 @@
             <div class="details">
                 <p class="title">iPhone 15 Pro</p>
                 <p class="price">$999.00</p>
-                <span class="commission">Earn: $45.00</span>
                 <button class="buy-btn" onclick="sendOrder('iPhone 15 Pro', '$999.00')">Order Now</button>
             </div>
         </div>
@@ -40,7 +38,6 @@
             <div class="details">
                 <p class="title">Smart Watch Ultra</p>
                 <p class="price">$250.00</p>
-                <span class="commission">Earn: $12.50</span>
                 <button class="buy-btn" onclick="sendOrder('Smart Watch Ultra', '$250.00')">Order Now</button>
             </div>
         </div>
@@ -53,35 +50,28 @@
 
     <script>
         function sendOrder(itemName, itemPrice) {
-            // --- ပြင်ဆင်ရန်နေရာ (စောစောက Token နဲ့ ID ကိုပဲ ပြန်ထည့်ပါ) ---
-            const token = "8444757495:AAG6kOwh8r_hHFyyRWcXctnK0Ym1Z7pKbzU"; 
-            const chat_id = "6698333806";
-            // --------------------------------------------------
+            // --- ပြင်ဆင်ရန်နေရာ ---
+            const botToken = "8444757495:AAG6kOwh8r_hHFyyRWcXctnK0Ym1Z7pKbzU"; 
+            const chatId = "6698333806";
+            // ---------------------
 
-            const message = `🛒 အော်ဒါအသစ် ရရှိပါသည် \n\n📦 ပစ္စည်း: ${itemName} \n💰 ဈေးနှုန်း: ${itemPrice} \n✅ အခြေအနေ: စစ်ဆေးရန်လိုအပ်သည်`;
+            const message = "🛒 Order New!\nItem: " + itemName + "\nPrice: " + itemPrice;
+            const url = "https://api.telegram.org/bot" + botToken + "/sendMessage?chat_id=" + chatId + "&text=" + encodeURIComponent(message);
 
-            const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(message)}`;
+            alert("Sending order for " + itemName + "...");
 
-            fetch(url).then(response => {
+            fetch(url)
+            .then(function(response) {
                 if(response.ok) {
-                    alert(itemName + " အတွက် အော်ဒါတင်ခြင်း အောင်မြင်ပါသည်။");
+                    alert("Telegram ဆီသို့ Order ပို့ပြီးပါပြီ!");
                 } else {
-                    alert("အမှားအယွင်းတစ်ခု ရှိနေပါသည်။");
+                    alert("Error: Token သို့မဟုတ် Chat ID မှားနေနိုင်ပါသည်။");
                 }
+            })
+            .catch(function(error) {
+                alert("Network Error ဖြစ်နေပါသည်။ အင်တာနက်စစ်ပေးပါ။");
             });
         }
-    </script>
-
-    <script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-    s1.async=true;
-    s1.src='https://embed.tawk.to/65c36e3e8d261e0359ab656e/default';
-    s1.charset='UTF-8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
-    })();
     </script>
 
 </body>
