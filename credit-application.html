@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Application</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#f8f9fb]">
+    <div class="p-6 text-center">
+        <div class="relative inline-block mb-4">
+            <div class="w-32 h-32 rounded-full border-[10px] border-orange-500 flex items-center justify-center">
+                <span class="text-3xl font-black text-orange-500">10</span>
+            </div>
+            <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-[10px] px-3 py-1 rounded-full uppercase">Current Score</div>
+        </div>
+        <h2 class="text-lg font-bold text-gray-800">Credit Rating: Good</h2>
+        <p class="text-xs text-gray-400 px-10 mt-2">Maximum score is 10. Below 7 may restrict withdrawals.</p>
+    </div>
+
+    <div class="p-4">
+        <div class="bg-white p-6 rounded-3xl shadow-sm">
+            <h3 class="font-bold text-sm mb-4">Apply for Credit Restoration</h3>
+            <p class="text-[11px] text-gray-500 mb-4">If your credit score was deducted, please submit an appeal to the administration department for review.</p>
+            
+            <textarea placeholder="Reason for appeal..." class="w-full bg-gray-50 border p-4 rounded-2xl text-xs h-32 outline-none focus:border-blue-500 mb-4"></textarea>
+            
+            <button onclick="alert('Application Submitted!')" class="w-full bg-blue-800 text-white py-4 rounded-2xl font-bold shadow-lg">Submit Application</button>
+        </div>
+    </div>
+</body>
+</html>
