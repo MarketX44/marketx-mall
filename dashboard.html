@@ -3,125 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MarketX - Professional Dashboard</title>
+    <title>Dashboard | MarketX Global</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #001f3f; --accent: #007bff; --danger: #ff4757; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; margin: 0; padding-bottom: 80px; }
-        
-        /* Header & Balance Card */
-        .header { background: var(--primary); color: white; padding: 30px 20px; border-radius: 0 0 25px 25px; text-align: center; }
-        .stats-container { display: flex; justify-content: space-around; margin-top: -25px; padding: 0 15px; }
-        .stat-box { background: white; padding: 15px; border-radius: 15px; width: 42%; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
-        .stat-box small { color: #888; font-size: 12px; }
-        .stat-box div { font-size: 18px; font-weight: bold; color: var(--primary); }
+        :root { --gold: #d4af37; --dark: #0a0a0a; --card: #161616; --text: #f0f0f0; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--dark); color: var(--text); padding-bottom: 80px; }
 
-        /* Mall Section */
-        .section-title { padding: 20px 20px 10px; font-size: 18px; font-weight: bold; color: var(--primary); }
-        .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 15px; }
-        .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .product-img { width: 100%; height: 140px; object-fit: cover; }
-        .details { padding: 10px; }
-        .buy-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 10px; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 8px; }
+        /* Top Balance Card */
+        .header-card { background: linear-gradient(135deg, #1a1a1a, #000); padding: 30px 20px; border-bottom: 1px solid var(--gold); text-align: center; }
+        .balance-label { font-size: 14px; opacity: 0.7; letter-spacing: 1px; }
+        .balance-amount { font-size: 36px; font-weight: 600; color: var(--gold); margin: 10px 0; }
+        .user-stats { display: flex; justify-content: space-around; margin-top: 20px; font-size: 13px; }
 
-        /* Bottom Menu */
-        .nav-bar { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #eee; }
-        .nav-item { text-decoration: none; color: #7f8c8d; font-size: 12px; text-align: center; }
-        .nav-item.active { color: var(--accent); }
+        /* VIP Levels Grid */
+        .section-title { padding: 20px; font-size: 18px; font-weight: 600; border-left: 4px solid var(--gold); margin: 20px; }
+        .vip-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 20px; }
+        .vip-card { background: var(--card); border-radius: 15px; padding: 20px; border: 1px solid #333; position: relative; overflow: hidden; }
+        .vip-card.locked { opacity: 0.6; }
+        .vip-badge { background: var(--gold); color: black; padding: 2px 10px; border-radius: 5px; font-size: 10px; font-weight: bold; position: absolute; top: 10px; right: 10px; }
+        .vip-name { font-size: 16px; font-weight: 600; margin-bottom: 5px; color: var(--gold); }
+        .vip-info { font-size: 12px; color: #aaa; margin-bottom: 15px; }
+        .btn-grab { width: 100%; padding: 10px; background: transparent; border: 1px solid var(--gold); color: var(--gold); border-radius: 8px; cursor: pointer; font-size: 12px; transition: 0.3s; }
+        .btn-grab:hover { background: var(--gold); color: black; }
+
+        /* Bottom Nav */
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #111; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #333; }
+        .nav-item { text-align: center; font-size: 12px; color: #888; text-decoration: none; }
+        .nav-item.active { color: var(--gold); }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h2 style="margin:0;">MarketX Mall</h2>
-        <p style="opacity:0.8; font-size: 14px;">Welcome Back, Agent</p>
-    </div>
-
-    <div class="stats-container">
-        <div class="stat-box">
-            <small>Total Balance</small>
-            <div>$1,250.00</div>
-        </div>
-        <div class="stat-box">
-            <small>My Commission</small>
-            <div style="color: #2ecc71;">$145.00</div>
+    <div class="header-card">
+        <div class="balance-label">TOTAL BALANCE</div>
+        <div class="balance-amount">$0.00</div>
+        <div class="user-stats">
+            <div>Today Profit<br><span style="color:var(--gold)">$0.00</span></div>
+            <div>Level<br><span style="color:var(--gold)">VIP 0</span></div>
         </div>
     </div>
 
-    <div style="text-align: right; padding: 15px 20px 0;">
-        <a href="withdraw.html" style="background: var(--danger); color: white; padding: 8px 15px; border-radius: 20px; text-decoration: none; font-size: 12px; font-weight: bold;">💰 Get Paid</a>
-    </div>
+    <div class="section-title">Investment Plans (VIP)</div>
 
-    <div class="section-title">Available Products</div>
-
-   <div class="product-grid">
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1696446701796-da61225697cc?q=80&w=500" class="product-img">
-            <div class="details">
-                <div style="font-size:14px; font-weight:bold;">iPhone 15 Pro</div>
-                <div style="color:var(--accent); font-weight:bold;">$999</div>
-                <button class="buy-btn" onclick="sendOrder('iPhone 15 Pro', '$999')">Order Now</button>
-            </div>
+    <div class="vip-container">
+        <div class="vip-card">
+            <span class="vip-badge">ACTIVE</span>
+            <div class="vip-name">VIP 0</div>
+            <div class="vip-info">Daily Profit: 10%<br>Min. Investment: Free</div>
+            <button class="btn-grab" onclick="location.href='task.html'">Start Grabbing</button>
         </div>
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1544117518-30dd0f787a3b?q=80&w=500" class="product-img">
-            <div class="details">
-                <div style="font-size:14px; font-weight:bold;">Watch Ultra</div>
-                <div style="color:var(--accent); font-weight:bold;">$250</div>
-                <button class="buy-btn" onclick="sendOrder('Watch Ultra', '$250')">Order Now</button>
-            </div>
+        <div class="vip-card">
+            <div class="vip-name">VIP 1</div>
+            <div class="vip-info">Daily Profit: 12%<br>Price: $100.00</div>
+            <button class="btn-grab" onclick="buyVIP(100)">Unlock Now</button>
         </div>
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=500" class="product-img">
-            <div class="details">
-                <div style="font-size:14px; font-weight:bold;">Premium Headphone</div>
-                <div style="color:var(--accent); font-weight:bold;">$150</div>
-                <button class="buy-btn" onclick="sendOrder('Headphone', '$150')">Order Now</button>
-            </div>
+        <div class="vip-card">
+            <div class="vip-name">VIP 2</div>
+            <div class="vip-info">Daily Profit: 15%<br>Price: $300.00</div>
+            <button class="btn-grab" onclick="buyVIP(300)">Unlock Now</button>
         </div>
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=500" class="product-img">
-            <div class="details">
-                <div style="font-size:14px; font-weight:bold;">Smart Sunglasses</div>
-                <div style="color:var(--accent); font-weight:bold;">$80</div>
-                <button class="buy-btn" onclick="sendOrder('Sunglasses', '$80')">Order Now</button>
-            </div>
+        <div class="vip-card">
+            <div class="vip-name">VIP 8</div>
+            <div class="vip-info">Daily Profit: 40%<br>Price: $10,000.00</div>
+            <button class="btn-grab" onclick="buyVIP(10000)">Unlock Now</button>
         </div>
     </div>
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1544117518-30dd0f787a3b?q=80&w=500" class="product-img">
-            <div class="details">
-                <div style="font-size:14px; font-weight:bold;">Watch Ultra</div>
-                <div style="color:var(--accent); font-weight:bold;">$250</div>
-                <button class="buy-btn" onclick="sendOrder('Watch Ultra', '$250')">Order Now</button>
-            </div>
-        </div>
-    </div>
-
-    <nav class="nav-bar">
-        <a href="#" class="nav-item active">🏠<br>Home</a>
-        <a href="withdraw.html" class="nav-item">💰<br>Withdraw</a>
-        <a href="index.html" class="nav-item">🚪<br>Logout</a>
+    <nav class="bottom-nav">
+        <a href="dashboard.html" class="nav-item active">🏠<br>Home</a>
+        <a href="task.html" class="nav-item">🛍️<br>Orders</a>
+        <a href="recharge.html" class="nav-item">💰<br>Recharge</a>
+        <a href="profile.html" class="nav-item">👤<br>Account</a>
     </nav>
 
     <script>
-        function sendOrder(name, price) {
-            // သင့်ရဲ့ Token နဲ့ ID ကို အောက်မှာ ပြန်ထည့်ပါ
-            const token = "8444757495:AAG6kOwh8r_hHFyyRWcXctnK0Ym1Z7pKbzU";
-            const chat_id = "6698333806";
-            
-            const message = `🎯 Order Received!\nItem: ${name}\nPrice: ${price}`;
-            const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(message)}`;
-
-            fetch(url).then(res => {
-                if(res.ok) alert("Order sent to admin!");
-            });
+        function buyVIP(price) {
+            alert("To unlock this level, please Recharge $" + price + " and contact support.");
+            window.location.href = "recharge.html";
         }
     </script>
-
-    </body>
+</body>
 </html>
 
