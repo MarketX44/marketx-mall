@@ -10,17 +10,23 @@
         body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--dark); color: white; padding: 20px; }
         .back-btn { color: var(--gold); text-decoration: none; font-size: 14px; display: inline-block; margin-bottom: 20px; }
         
-        .recharge-box { background: var(--gray); padding: 25px; border-radius: 20px; border: 1px solid #333; }
+        .recharge-box { background: var(--gray); padding: 25px; border-radius: 20px; border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         h2 { color: var(--gold); margin-top: 0; }
         
         .input-group { margin-bottom: 20px; }
         label { display: block; font-size: 12px; margin-bottom: 8px; color: #aaa; }
-        input { width: 100%; padding: 15px; background: #222; border: 1px solid #444; border-radius: 10px; color: white; box-sizing: border-box; }
+        input { width: 100%; padding: 15px; background: #222; border: 1px solid #444; border-radius: 10px; color: white; box-sizing: border-box; outline: none; }
+        input:focus { border-color: var(--gold); }
         
-        .qr-section { text-align: center; margin: 20px 0; padding: 20px; background: #000; border-radius: 15px; }
-        .qr-placeholder { width: 150px; height: 150px; background: #fff; margin: 0 auto; display: flex; align-items: center; justify-content: center; color: #000; font-weight: bold; }
+        .qr-section { text-align: center; margin: 20px 0; padding: 25px; background: #000; border-radius: 15px; border: 1px dashed #444; }
+        /* QR ပုံရှိလျှင် ဤနေရာတွင် src ပြောင်းပါ */
+        .qr-image { width: 180px; height: 180px; background: #fff; margin: 0 auto; display: flex; align-items: center; justify-content: center; border-radius: 10px; }
+        .qr-image img { width: 100%; height: 100%; border-radius: 10px; }
 
-        .btn-submit { width: 100%; padding: 16px; background: var(--gold); color: black; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; }
+        .address-box { background: #222; padding: 10px; border-radius: 8px; margin-top: 15px; word-break: break-all; font-size: 13px; color: var(--gold); border: 1px solid #333; }
+
+        .btn-submit { width: 100%; padding: 16px; background: var(--gold); color: black; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 16px; transition: 0.3s; }
+        .btn-submit:active { transform: scale(0.98); }
     </style>
 </head>
 <body>
@@ -29,44 +35,63 @@
 
     <div class="recharge-box">
         <h2>Recharge Funds</h2>
-        <p style="font-size: 13px; color: #888;">Enter the amount and transfer to the wallet below.</p>
+        <p style="font-size: 13px; color: #888;">Minimum Deposit: $10.00 (USDT TRC20)</p>
 
         <div class="input-group">
-            <label>Amount (USD)</label>
-            <input type="number" id="amount" placeholder="Minimum $10">
+            <label>Amount to Recharge (USD)</label>
+            <input type="number" id="amount" placeholder="Enter amount (e.g. 100)">
         </div>
 
         <div class="qr-section">
-            <div class="qr-placeholder">TYGguLzTAhfWvX19BNNhoLPbc4r6biXexV</div>
-            <p style="font-size: 12px; margin-top: 10px;">TRC20 Address:<br><span style="color:var(--gold)">Your_Wallet_Address_Here</span></p>
+            <div class="qr-image">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=YOUR_USDT_ADDRESS" alt="QR Code">
+            </div>
+            <p style="font-size: 12px; margin-top: 15px; color: #aaa;">TRC20 Wallet Address:</p>
+            <div class="address-box" id="wallet-address">
+                🔴 TYGguLzTAhfWvX19BNNhoLPbc4r6biXexV
+            </div>
         </div>
 
         <div class="input-group">
-            <label>Upload Screenshot (Transfer Proof)</label>
+            <label>Upload Payment Screenshot</label>
             <input type="file" id="screenshot" accept="image/*">
         </div>
 
-        <button class="btn-submit" onclick="submitRecharge()">Submit Request</button>
+        <button class="btn-submit" onclick="submitRecharge()">SUBMIT REQUEST</button>
     </div>
 
     <script>
         function submitRecharge() {
             const amount = document.getElementById('amount').value;
+            const wallet = document.getElementById('wallet-address').innerText;
+            
             if(!amount || amount < 10) {
-                alert("Please enter a valid amount (Min $10)");
+                alert("Please enter a valid amount (Minimum $10)");
                 return;
             }
 
-            // Telegram သို့ အကြောင်းကြားစာပို့ခြင်း
+            // Telegram Bot Configuration
             const botToken = "8444757495:AAG6kOwh8r_hHFyyRWcXctnK0Ym1Z7pKbzU";
             const chatId = "6698333806";
-            const msg = `💰 Recharge Request\nAmount: $${amount}\nStatus: Pending Approval`;
             
-            fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(msg)}`)
-            .then(() => {
-                alert("Recharge request submitted! Admin will verify your payment soon.");
-                window.location.href = "dashboard.html";
-            });
+            const msg = `💰 **NEW RECHARGE REQUEST** 💰\n\n` +
+                        `👤 User: Unknown (Check DB)\n` +
+                        `💵 Amount: $${amount}\n` +
+                        `🏦 Network: USDT TRC20\n` +
+                        `⏳ Status: Pending Verification`;
+
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(msg)}&parse_mode=Markdown`;
+
+            fetch(url)
+            .then(res => {
+                if(res.ok) {
+                    alert("Submission Successful! Your deposit will be reviewed by admin.");
+                    window.location.href = "dashboard.html";
+                } else {
+                    alert("Telegram Connection Error. Please check your Bot settings.");
+                }
+            })
+            .catch(err => alert("Error: " + err));
         }
     </script>
 </body>
