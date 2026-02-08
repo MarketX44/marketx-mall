@@ -5,71 +5,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MarketX - Home</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
-        .shopping-anim { width: 100px; animation: bounce 2s infinite; }
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .swiper-pagination-bullet-active { background: #1e40af !important; }
     </style>
 </head>
-<body class="bg-gray-50 pb-24">
+<body class="bg-[#f8f9fb] pb-24">
 
-    <div id="home-page">
-        <div class="bg-white p-6 text-center border-b">
-            <h1 class="text-2xl font-black text-blue-800 tracking-tighter italic">MARKET <span class="text-orange-500">X</span></h1>
-            <div class="flex justify-center mt-2">
-                <img src="https://cdn-icons-png.flaticon.com/512/3081/3081986.png" class="shopping-anim" alt="Shopping Animation">
-            </div>
-        </div>
-
-        <div class="p-4">
-            <h3 class="font-bold text-gray-700 mb-3">Today's Performance</h3>
-            <div class="grid grid-cols-2 gap-3">
-                <div class="bg-white p-4 rounded-2xl shadow-sm">
-                    <p class="text-[10px] text-gray-400 uppercase font-bold">Today Profit</p>
-                    <p id="today-profit" class="text-lg font-bold text-green-600">$0.00</p>
-                </div>
-                <div class="bg-white p-4 rounded-2xl shadow-sm">
-                    <p class="text-[10px] text-gray-400 uppercase font-bold">Turnover</p>
-                    <p id="today-turnover" class="text-lg font-bold text-blue-700">$0.00</p>
-                </div>
-                <div class="bg-white p-4 rounded-2xl shadow-sm">
-                    <p class="text-[10px] text-gray-400 uppercase font-bold">Orders Received</p>
-                    <p id="order-count" class="text-lg font-bold text-gray-800">0</p>
-                </div>
-                <div class="bg-white p-4 rounded-2xl shadow-sm">
-                    <p class="text-[10px] text-gray-400 uppercase font-bold">Credit Score</p>
-                    <p id="credit-score" class="text-lg font-bold text-orange-500">10 / 10</p>
-                </div>
-            </div>
+    <div class="bg-white px-4 py-3 flex justify-between items-center shadow-sm">
+        <h1 class="text-xl font-black text-blue-800 italic">MARKET <span class="text-orange-500">X</span></h1>
+        <div class="flex gap-3">
+            <span class="text-xl">🔔</span>
         </div>
     </div>
 
-    <nav class="fixed bottom-0 w-full bg-white border-t flex justify-around py-4 shadow-2xl">
-        <button onclick="showPage('home')" class="text-blue-700 text-center">🏠<br><span class="text-[10px]">Home</span></button>
-        <button onclick="showPage('commodity')" class="text-gray-400 text-center">📦<br><span class="text-[10px]">Commodity</span></button>
-        <button onclick="showPage('order')" class="text-gray-400 text-center">📋<br><span class="text-[10px]">Orders</span></button>
-        <button onclick="showPage('account')" class="text-gray-400 text-center">👤<br><span class="text-[10px]">Account</span></button>
+    <div class="swiper mySwiper m-4 rounded-2xl overflow-hidden shadow-md">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="https://img.freepik.com/free-vector/horizontal-banner-online-fashion-shopping-with-woman_23-2148585404.jpg" class="w-full h-40 object-cover"></div>
+            <div class="swiper-slide"><img src="https://img.freepik.com/free-vector/ecommerce-web-page-concept-illustration_114360-8204.jpg" class="w-full h-40 object-cover"></div>
+            <div class="swiper-slide"><img src="https://img.freepik.com/free-vector/flat-sale-background-concept_23-2148658145.jpg" class="w-full h-40 object-cover"></div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <div class="mx-4 bg-white p-4 rounded-2xl shadow-sm border border-blue-50">
+        <div class="flex justify-between items-center mb-2">
+            <div class="flex items-center gap-2">
+                <span class="bg-blue-100 text-blue-700 text-[10px] font-bold px-2 py-0.5 rounded">VIP 1</span>
+                <span class="text-xs font-bold text-gray-700">Next Level: VIP 2</span>
+            </div>
+            <span class="text-[10px] text-gray-400">Target: $300.00</span>
+        </div>
+        <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
+            <div class="bg-blue-600 h-full w-[45%] rounded-full"></div>
+        </div>
+        <p class="text-[9px] text-gray-400 mt-1">Recharge $165.00 more to upgrade</p>
+    </div>
+
+    <div class="grid grid-cols-3 gap-2 p-4">
+        <div class="bg-white p-3 rounded-xl text-center shadow-sm active:scale-95 transition">
+            <div class="text-2xl mb-1">🎁</div>
+            <p class="text-[10px] font-medium text-gray-600">Invite Friends</p>
+        </div>
+        <div class="bg-white p-3 rounded-xl text-center shadow-sm active:scale-95 transition">
+            <div class="text-2xl mb-1">🎧</div>
+            <p class="text-[10px] font-medium text-gray-600">Customer Service</p>
+        </div>
+        <div class="bg-white p-3 rounded-xl text-center shadow-sm active:scale-95 transition">
+            <div class="text-2xl mb-1">📖</div>
+            <p class="text-[10px] font-medium text-gray-600">Tutorial</p>
+        </div>
+    </div>
+
+    <div class="px-4 mb-4">
+        <div class="bg-white p-4 rounded-2xl shadow-sm grid grid-cols-2 gap-4">
+            <div><p class="text-[10px] text-gray-400 font-bold uppercase">Today Profit</p><p class="text-lg font-bold text-green-600">$0.00</p></div>
+            <div><p class="text-[10px] text-gray-400 font-bold uppercase">Turnover</p><p class="text-lg font-bold text-blue-700">$0.00</p></div>
+        </div>
+    </div>
+
+    <div class="mx-4 bg-white p-4 rounded-2xl shadow-sm border-l-4 border-orange-500">
+        <h3 class="font-bold text-sm text-gray-800 mb-3 flex justify-between">
+            My Shop <span>🛒</span>
+        </h3>
+        <div class="flex justify-between items-center bg-gray-50 p-3 rounded-xl mb-3">
+            <div>
+                <p class="text-[10px] text-gray-400">Listed Products</p>
+                <p id="listed-count" class="font-bold text-blue-800">12 Items</p>
+            </div>
+            <div class="text-right">
+                <p class="text-[10px] text-gray-400">Credit Score</p>
+                <p id="credit-score" class="font-bold text-orange-500">10 / 10</p>
+            </div>
+        </div>
+        <a href="commodity.html" class="block text-center text-[10px] text-blue-600 font-bold underline">Manage Products</a>
+    </div>
+
+    <nav class="fixed bottom-0 w-full bg-white border-t flex justify-around py-4 z-50">
+        <a href="dashboard.html" class="text-blue-700 text-center">🏠<br><span class="text-[10px]">Home</span></a>
+        <a href="commodity.html" class="text-gray-400 text-center">📦<br><span class="text-[10px]">Commodity</span></a>
+        <a href="order.html" class="text-gray-400 text-center">📋<br><span class="text-[10px]">Orders</span></a>
+        <a href="account.html" class="text-gray-400 text-center">👤<br><span class="text-[10px]">Account</span></a>
     </nav>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // အခြေခံ Logic များ
-        let stats = {
-            profit: 0.00,
-            turnover: 0.00,
-            orders: 0,
-            credit: 10
-        };
-
-        function updateStats() {
-            document.getElementById('today-profit').innerText = `$${stats.profit.toFixed(2)}`;
-            document.getElementById('today-turnover').innerText = `$${stats.turnover.toFixed(2)}`;
-            document.getElementById('order-count').innerText = stats.orders;
-            document.getElementById('credit-score').innerText = `${stats.credit} / 10`;
-        }
-
-        // Page Switching Logic (ရိုးရှင်းအောင် လုပ်ထားသည်)
-        function showPage(page) {
-            alert(page + " page is under construction. I will provide code for this in the next step!");
-        }
+        var swiper = new Swiper(".mySwiper", {
+            pagination: { el: ".swiper-pagination", clickable: true },
+            autoplay: { delay: 3000 },
+            loop: true
+        });
     </script>
 </body>
 </html>
