@@ -37,50 +37,29 @@
         </p>
     </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+   // login.html ထဲက script အပိုင်းမှာ ဒါလေးကို အစားထိုးကြည့်ပါ
+document.getElementById('logBtn').onclick = async () => {
+    const email = document.getElementById('logEmail').value.trim();
+    const pass = document.getElementById('logPassword').value;
 
-        // Firebase Configuration (သင့် Project အချက်အလက်များ)
-        const firebaseConfig = {
-            apiKey: "AIzaSyC_h1U5C2PWZgijCdgOBR8noVZGpCE6RMc",
-            authDomain: "global-market-mall.firebaseapp.com",
-            projectId: "global-market-mall",
-            storageBucket: "global-market-mall.firebasestorage.app",
-            messagingSenderId: "940088052682",
-            appId: "1:940088052682:web:420dfa92084d07a3c31d33"
-        };
+    if (!email.includes("@")) {
+        alert("Email format မမှန်ပါသဖြင့် admin@gmail.com ကဲ့သို့ ရိုက်ထည့်ပေးပါ");
+        return;
+    }
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-
-        document.getElementById('logBtn').onclick = async () => {
-            // .trim() က Email ရဲ့ ရှေ့နောက်မှာ ပါလာနိုင်တဲ့ space တွေကို ဖြတ်ထုတ်ပေးတယ်
-            const email = document.getElementById('logEmail').value.trim();
-            const pass = document.getElementById('logPassword').value;
-
-            if (!email || !pass) {
-                alert("Please fill in all fields.");
-                return;
-            }
-
-            try {
-                await signInWithEmailAndPassword(auth, email, pass);
-                alert("Login Successful!");
-                window.location.href = "index.html"; 
-            } catch (error) {
-                // Error တွေကို ပိုပြီး ရှင်းရှင်းလင်းလင်း ပြပေးဖို့
-                if (error.code === 'auth/invalid-email') {
-                    alert("The email address format is incorrect. (e.g., name@gmail.com)");
-                } else if (error.code === 'auth/user-not-found') {
-                    alert("No account found with this email.");
-                } else if (error.code === 'auth/wrong-password') {
-                    alert("Incorrect password. Please try again.");
-                } else {
-                    alert("Error: " + error.message);
-                }
-            }
-        };
-    </script>
+    try {
+        await signInWithEmailAndPassword(auth, email, pass);
+        alert("Login အောင်မြင်သည်!");
+        window.location.href = "index.html"; 
+    } catch (error) {
+        console.log(error.code);
+        if (error.code === 'auth/configuration-not-found') {
+            alert("Firebase Console ထဲတွင် Email/Password Login ကို Enable လုပ်ရန် လိုအပ်နေပါသည်");
+        } else {
+            alert("မှားယွင်းနေပါသည်: " + error.message);
+        }
+    }
+};
 </body>
 </html>
+
